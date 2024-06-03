@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Google Calendar and Email API",
+    "description": "API to cancel a meeting in Google Calendar and send an email.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/createMeeting": {
+      "post": {
+        "summary": "Create a meeting in Google Calendar",
+        "description": "Creates a new meeting.",
+        "operationId": "create_meeting",
+        "requestBody": {
+          "description": "JSON payload containing the attendee email, summary, and meeting description",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "to_email": {
+                    "type": "string",
+                    "description": "The attendee's email address",
+                    "example": "recipient@example.com"
+                  },
+                  "summary": {
+                    "type": "string",
+                    "description": "The subject of the meeting",
+                    "example": "Quick project catch up"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The content of the meeting",
+                    "example": "Hi! Booking some time for us to go over project requirements. Best"
+                  }
+                },
+                "required": ["to_email", "summary", "description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Event created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Event created successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing 'to_email', 'summary', or 'description' in the request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "An error occurred while creating the meeting."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
