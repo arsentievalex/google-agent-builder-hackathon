@@ -1,0 +1,298 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Google Calendar Events Viewer",
+    "version": "1.0.0",
+    "description": "API to view upcoming Google Calendar events using a service account."
+  },
+  "servers": [
+    {
+      "url": "",
+    }
+  ],
+  "paths": {
+    "/viewCalendar": {
+      "get": {
+        "summary": "View Upcoming Meetings",
+        "operationId": "view_meetings",
+        "description": "Fetches the next 10 upcoming events from the specified Google Calendar.",
+        "responses": {
+          "200": {
+            "description": "A list of upcoming events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string"
+                      },
+                      "etag": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "htmlLink": {
+                        "type": "string"
+                      },
+                      "created": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updated": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "summary": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "location": {
+                        "type": "string"
+                      },
+                      "creator": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string"
+                          },
+                          "displayName": {
+                            "type": "string"
+                          },
+                          "self": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "organizer": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string"
+                          },
+                          "displayName": {
+                            "type": "string"
+                          },
+                          "self": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "start": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "dateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "timeZone": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "end": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "dateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "timeZone": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "recurrence": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "attendees": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "email": {
+                              "type": "string"
+                            },
+                            "displayName": {
+                              "type": "string"
+                            },
+                            "organizer": {
+                              "type": "boolean"
+                            },
+                            "self": {
+                              "type": "boolean"
+                            },
+                            "resource": {
+                              "type": "boolean"
+                            },
+                            "optional": {
+                              "type": "boolean"
+                            },
+                            "responseStatus": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "hangoutLink": {
+                        "type": "string"
+                      },
+                      "conferenceData": {
+                        "type": "object",
+                        "properties": {
+                          "createRequest": {
+                            "type": "object",
+                            "properties": {
+                              "requestId": {
+                                "type": "string"
+                              },
+                              "conferenceSolutionKey": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "status": {
+                                "type": "object",
+                                "properties": {
+                                  "statusCode": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "entryPoints": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "entryPointType": {
+                                  "type": "string"
+                                },
+                                "uri": {
+                                  "type": "string"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "pin": {
+                                  "type": "string"
+                                },
+                                "accessCode": {
+                                  "type": "string"
+                                },
+                                "meetingCode": {
+                                  "type": "string"
+                                },
+                                "passcode": {
+                                  "type": "string"
+                                },
+                                "password": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "conferenceSolution": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "iconUri": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "conferenceId": {
+                            "type": "string"
+                          },
+                          "signature": {
+                            "type": "string"
+                          },
+                          "notes": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "reminders": {
+                        "type": "object",
+                        "properties": {
+                          "useDefault": {
+                            "type": "boolean"
+                          },
+                          "overrides": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "method": {
+                                  "type": "string"
+                                },
+                                "minutes": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "eventType": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
