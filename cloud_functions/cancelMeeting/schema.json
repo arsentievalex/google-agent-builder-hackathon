@@ -1,0 +1,106 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Google Calendar and Email API",
+    "description": "API to cancel a meeting in Google Calendar and send an email.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/cancelMeeting": {
+      "post": {
+        "summary": "Cancel Meeting and Send Email",
+        "description": "Cancels a meeting and sends an email notification.",
+        "operationId": "cancel_meeting",
+        "requestBody": {
+          "description": "JSON payload containing the meeting ID, recipient email, subject, and email content",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event_id": {
+                    "type": "string",
+                    "description": "The ID of the event to be cancelled",
+                    "example": "2ah2o8vo90ha7r064dqqddodnl"
+                  },
+                  "to_email": {
+                    "type": "string",
+                    "description": "The recipient's email address",
+                    "example": "recipient@example.com"
+                  },
+                  "subject": {
+                    "type": "string",
+                    "description": "The subject of the email",
+                    "example": "Meeting Update"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "The content of the email",
+                    "example": "The meeting has been cancelled."
+                  }
+                },
+                "required": ["event_id", "to_email", "subject", "content"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Event cancelled and email sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Event cancelled and email sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing event_id, 'to_email', 'subject', or 'content' in the request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "An error occurred while cancelling the event or sending the email"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
